@@ -15,7 +15,7 @@ import lombok.*;
 @Data @NoArgsConstructor @AllArgsConstructor @Getter @Setter
 public class Compte {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@JsonProperty(access=Access.READ_ONLY)
+	
 	private long idCompte;
 	private double montant;
 	@ManyToOne

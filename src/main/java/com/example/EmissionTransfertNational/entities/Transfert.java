@@ -65,4 +65,5 @@ public class Transfert {
 	@JsonIgnoreProperties({"transfert_demandes","transfert_servis","agents"})
 	private LieuDeTravail lieuDeDemande;
 	private boolean notification=false;
+	private String motifRestitution;
 }

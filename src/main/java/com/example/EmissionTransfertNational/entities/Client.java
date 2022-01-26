@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.example.EmissionTransfertNational.enums.Sexe;
 import com.example.EmissionTransfertNational.enums.TypeClient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -26,7 +27,7 @@ public class Client {
 	@JsonIgnoreProperties({"client"})
 	private PieceIdentite piece_identite;
 	@OneToMany( targetEntity=Compte.class, mappedBy="client")
-	@JsonIgnoreProperties({"client"})
+	@JsonIgnore
 	private List<Compte> comptes;
 	@Enumerated(EnumType.STRING)
 	private TypeClient type;

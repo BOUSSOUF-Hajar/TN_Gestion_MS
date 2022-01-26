@@ -45,6 +45,7 @@ public class TransfertRestController {
 	@PutMapping(path="/update_Transfert/{id}")
 	public Transfert updateTransfert(@PathVariable Long id,@RequestBody Transfert cl){
 		cl.setId(id);
+		
 		return tR.save(cl);
 		
 	}
