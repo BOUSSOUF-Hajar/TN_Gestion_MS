@@ -2,11 +2,12 @@ package com.example.EmissionTransfertNational.web;
 
 import java.util.List;
 
+
 import org.springframework.web.bind.annotation.*;
 
 import com.example.EmissionTransfertNational.entities.*;
 import com.example.EmissionTransfertNational.repositories.*;
-@RestController
+@RestController @CrossOrigin("*")
 public class AgentRestController {
 	private AgentRepository agentR;
 	private CompteRepository cptR;
