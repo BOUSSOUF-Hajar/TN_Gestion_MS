@@ -11,4 +11,12 @@ public interface ClientRepository extends JpaRepository<Client,Long> {
 	Client findWithIdClient(@Param("idclient")long id);
 	
 	Client findByIdClient(long id);
+
+	Client findByUsernameAndPassword(String username, String password);
+
+	Client findByUsername(String username);
+
+	Client findByEmail(String email);
+
+	Client findByEmailAndPassword(String email, String password);
 }

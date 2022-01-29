@@ -28,6 +28,16 @@ public class ClientRestController {
 		return clientR.findAll();
 		
 	}
+	
+	@PostMapping(path="/login")
+	public Client login(@RequestBody Client client) {
+		Client clientFind = clientR.findByEmailAndPassword(client.getEmail(), client.getPassword());
+		if(clientFind == null) {
+			return null;
+		}else {
+			return clientFind;
+		}
+	}
 	@GetMapping(path="/get_client/{id}")
 	public Client getClient(@PathVariable Long id){
 		return clientR.findById(id).get();

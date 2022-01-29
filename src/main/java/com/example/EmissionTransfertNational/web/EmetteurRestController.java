@@ -51,8 +51,8 @@ public class EmetteurRestController {
 	}
 	@PostMapping(path="/add_Emetteur")
 	public Emetteur saveEmetteur(@RequestBody Emetteur emetteur){
-		
 		PieceIdentite pi=emetteur.getPiece_identite();
+		emetteur.setRole("emetteur");
 		emetteur.setTransferts(null);
 		if(pi!=null){
 			pR.save(pi);
@@ -73,9 +73,8 @@ public class EmetteurRestController {
 		}
 		 List<Compte>l=emetteur.getComptes();
 		 if(l!=null){
-			 emetteur.setComptes(null);
-		 emetteurR.save(emetteur);
 		 for(Compte c:l){
+			 System.out.println(c.toString());
 			 c.setClient(emetteur);
 			 cptR.save(c);
 		 }
@@ -100,7 +99,9 @@ public class EmetteurRestController {
 	}
 	@PutMapping(path="/update_Emetteur/{id}")
 	public Emetteur updateEmetteur(@PathVariable Long id,@RequestBody Emetteur neEmetteur){
-		neEmetteur.setIdClient(id);
+		for(Beneficiaire b:neEmetteur.getBeneficiaires()) {
+			System.out.println(b.getNom());
+		}
 		neEmetteur.setIdClient(id);
 		Emetteur benOriginal=emetteurR.getById(id);
 		neEmetteur.setComptes(benOriginal.getComptes());

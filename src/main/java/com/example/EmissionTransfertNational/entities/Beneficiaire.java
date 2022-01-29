@@ -5,12 +5,13 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 @Entity
 @Table(name="Beneficiaire")
-@Data @NoArgsConstructor  @Getter @Setter
+@Data @NoArgsConstructor
 public class Beneficiaire extends Client {
 	@Column(name="idBeneficiaire")
 	private long idClient;
@@ -22,5 +23,6 @@ public class Beneficiaire extends Client {
 	@JsonIgnoreProperties({"beneficiaires","transfert"})
 	@ManyToMany
 	@JoinTable(name="Emetteur_Beneficiaire",joinColumns=@JoinColumn(name="idBeneficiaire"),inverseJoinColumns=@JoinColumn(name="idEmetteur"))
+	@JsonIgnore
 	private List<Emetteur> emetteurs;
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 import com.example.EmissionTransfertNational.enums.TypeCompte;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -18,7 +19,9 @@ public class Compte {
 	
 	private long idCompte;
 	private double montant;
-	@ManyToOne
+	@ManyToOne(   cascade = {
+        CascadeType.PERSIST    })
+	@JsonIgnore
 	@JoinColumn(name="idClient")
 	private Client client;
 	private Date date_ouverture;
