@@ -57,6 +57,7 @@ public class BeneficiaireRestController {
 		
 		PieceIdentite pi=beneficiaire.getPiece_identite();
 		beneficiaire.setTransferts(null);
+		beneficiaire.setRole("beneficiaire");
 		beneficiaire.setEmetteurs(null);
 		if(pi!=null){
 			pR.save(pi);

@@ -22,12 +22,13 @@ public class Client {
 	private String nom;
 	private String prenom;
 	private String telephone;
+	private String password;
+	private String role;
 	@OneToOne
     @JoinColumn(name = "piece_id", referencedColumnName = "id")
 	@JsonIgnoreProperties({"client"})
 	private PieceIdentite piece_identite;
-	@OneToMany( targetEntity=Compte.class, mappedBy="client")
-	@JsonIgnore
+	@OneToMany(targetEntity=Compte.class, mappedBy="client")
 	private List<Compte> comptes;
 	@Enumerated(EnumType.STRING)
 	private TypeClient type;

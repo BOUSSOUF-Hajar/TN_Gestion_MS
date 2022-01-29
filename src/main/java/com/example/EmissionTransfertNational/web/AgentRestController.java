@@ -39,6 +39,7 @@ public class AgentRestController {
 			return null;
 		}
 		PieceIdentite pi=agent.getPiece_identite();
+		agent.setRole("agent");
 		agent.setTransferts(null);
 		if(pi!=null){
 			pR.save(pi);
