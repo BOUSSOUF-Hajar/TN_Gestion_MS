@@ -22,6 +22,7 @@ public class Client {
 	private String nom;
 	private String prenom;
 	private String telephone;
+	private String username;
 	private String password;
 	private String role;
 	@OneToOne
