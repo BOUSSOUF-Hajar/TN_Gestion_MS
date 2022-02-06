@@ -39,6 +39,8 @@ public class AgentRestController {
 			System.out.println("agent null");
 			return null;
 		}
+		
+		agent.setPassword("simo1234");
 		PieceIdentite pi=agent.getPiece_identite();
 		agent.setRole("agent");
 		agent.setTransferts(null);

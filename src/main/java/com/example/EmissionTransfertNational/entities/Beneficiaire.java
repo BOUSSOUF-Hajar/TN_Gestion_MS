@@ -21,7 +21,10 @@ public class Beneficiaire extends Client {
 	@Transient
 	private List <Transfert> transferts;
 	@JsonIgnoreProperties({"beneficiaires","transfert"})
-	@ManyToMany
+	
+	@ManyToMany(  cascade = {
+	        CascadeType.MERGE, 
+	    })
 	@JoinTable(name="Emetteur_Beneficiaire",joinColumns=@JoinColumn(name="idBeneficiaire"),inverseJoinColumns=@JoinColumn(name="idEmetteur"))
 	@JsonIgnore
 	private List<Emetteur> emetteurs;

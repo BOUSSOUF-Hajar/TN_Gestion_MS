@@ -29,6 +29,7 @@ public class ClientRestController {
 		
 	}
 	
+
 	@PostMapping(path="/login")
 	public Client login(@RequestBody Client client) {
 		Client clientFind = clientR.findByEmailAndPassword(client.getEmail(), client.getPassword());

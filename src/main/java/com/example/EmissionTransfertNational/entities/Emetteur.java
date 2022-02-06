@@ -28,9 +28,10 @@ public @Data class Emetteur extends Client {
 	@OneToMany( targetEntity=Transfert.class, mappedBy="emetteur")
 	@Transient
 	private List<Transfert> transferts;
-	@JsonIgnoreProperties(value={"emetteur","transfert"},allowSetters=true)
+	
+	@JsonIgnoreProperties(value={"emetteur","transfert"},allowSetters = true)
 	@ManyToMany(  cascade = {
-        CascadeType.PERSIST, 
+        CascadeType.MERGE, 
     })
 	@JoinTable(name="Emetteur_Beneficiaire",joinColumns=@JoinColumn(name="idEmetteur"),inverseJoinColumns=@JoinColumn(name="idBeneficiaire"))
 	private List<Beneficiaire>beneficiaires;

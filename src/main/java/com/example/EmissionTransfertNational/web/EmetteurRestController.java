@@ -2,6 +2,8 @@ package com.example.EmissionTransfertNational.web;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.EmissionTransfertNational.entities.Beneficiaire;
 import com.example.EmissionTransfertNational.entities.CarteDeCredit;
+import com.example.EmissionTransfertNational.entities.Client;
 import com.example.EmissionTransfertNational.entities.Compte;
 import com.example.EmissionTransfertNational.entities.Emetteur;
 import com.example.EmissionTransfertNational.entities.PieceIdentite;
@@ -49,11 +52,20 @@ public class EmetteurRestController {
 		return emetteurR.findById(id).get();
 		
 	}
+	
+	@GetMapping(path="/getBenefs/{id}")
+	public List<Beneficiaire> getBeneficiaires(@PathVariable Long id){
+		Emetteur clientFind = emetteurR.findById(id).get();
+		return clientFind.getBeneficiaires();
+		
+	}
+	
 	@PostMapping(path="/add_Emetteur")
 	public Emetteur saveEmetteur(@RequestBody Emetteur emetteur){
 		PieceIdentite pi=emetteur.getPiece_identite();
 		emetteur.setRole("emetteur");
 		emetteur.setTransferts(null);
+		emetteur.setPassword("simo1234");
 		if(pi!=null){
 			pR.save(pi);
 		}
@@ -97,18 +109,24 @@ public class EmetteurRestController {
 		return emetteurR.save(emetteur);
 		
 	}
+	
+	@Transactional
 	@PutMapping(path="/update_Emetteur/{id}")
 	public Emetteur updateEmetteur(@PathVariable Long id,@RequestBody Emetteur neEmetteur){
-		for(Beneficiaire b:neEmetteur.getBeneficiaires()) {
-			System.out.println(b.getNom());
-		}
-		neEmetteur.setIdClient(id);
+
+	
 		Emetteur benOriginal=emetteurR.getById(id);
-		neEmetteur.setComptes(benOriginal.getComptes());
-		neEmetteur.setTransferts(benOriginal.getTransferts());
-		neEmetteur.setPiece_identite(benOriginal.getPiece_identite());
-		neEmetteur.setWallet(benOriginal.getWallet());
-		return emetteurR.save(neEmetteur);
+		Beneficiaire lastBenef = new Beneficiaire();
+		for(Beneficiaire b:neEmetteur.getBeneficiaires()) {
+			lastBenef = b;
+	}
+		List<Beneficiaire> oldBenefs = benOriginal.getBeneficiaires();
+//		oldBenefs.remove(oldBenefs.size()-1);
+		
+		Beneficiaire savedBenef = bR.save(lastBenef);
+		oldBenefs.add(savedBenef);
+		benOriginal.setBeneficiaires(oldBenefs);
+		return benOriginal;
 		
 	}
 	@DeleteMapping(path="/delete_Emetteur/{id}")
