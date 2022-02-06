@@ -32,6 +32,13 @@ public class TransfertRestController {
 		return tR.findById(id).get();
 		
 	}
+	
+	@GetMapping(path="/getTransferts/{id}")
+	public List<Transfert> getTransfertByEmetteur(@PathVariable long id) {
+		long idd = 8;
+		return tR.findByEmetteur_idClient(idd);
+		
+	}
 	@PostMapping(path="/add_Transfert")
 	public Transfert saveTransfert(@RequestBody Transfert transfert){
 		Emetteur em=transfert.getEmetteur();
@@ -49,6 +56,8 @@ public class TransfertRestController {
 		return tR.save(cl);
 		
 	}
+	
+	
 	@DeleteMapping(path="/delete_Transfert/{id}")
 	public void deleteTransfert(@PathVariable Long id){
 		tR.deleteById(id);

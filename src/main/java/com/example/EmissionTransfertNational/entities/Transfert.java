@@ -39,11 +39,11 @@ public class Transfert {
 	private TypeFrais frais;
 	@ManyToOne
 	@JoinColumn(name="emetteur_id")
-	@JsonIgnoreProperties({"transfert"})
+	@JsonIgnoreProperties({"emetteur"})
 	private Emetteur emetteur;
 	@ManyToOne
 	@JoinColumn(name="agent_id")
-	@JsonIgnoreProperties({"transfert","pointdevente"})
+	@JsonIgnoreProperties({"agent","pointdevente"})
 	private Agent agent;
 	private String pays_d_emission;
 	@ManyToOne
